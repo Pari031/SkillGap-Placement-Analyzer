@@ -1,0 +1,161 @@
+/* =========================================
+   1. CORE THEME & VARIABLES
+   ========================================= */
+:root {
+    --primary: #4338ca;
+    --primary-light: #eef2ff; 
+    --secondary: #0f172a;
+    --accent: #10b981;
+    --bg: #f8fafc;
+    --text: #1e293b;
+    --border-color: #e2e8f0;
+    --white: #ffffff;
+    --sidebar-width: 260px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.app-container { display: flex; width: 100%; min-height: 100vh; }
+
+/* Sidebar Logic */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--secondary);
+    padding: 2rem 1rem;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+    transition: width 0.3s ease;
+}
+
+.sidebar-logo { color: white; font-size: 1.5rem; font-weight: 700; margin-bottom: 3rem; display: flex; align-items: center; gap: 10px; }
+.sidebar-menu { list-style: none; }
+.sidebar-menu a {
+    color: #94a3b8;
+    text-decoration: none;
+    padding: 12px 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+.sidebar-menu a:hover, .sidebar-menu a.active { background: rgba(255,255,255,0.1); color: white; }
+
+.main-layout { 
+    flex: 1; 
+    margin-left: var(--sidebar-width); 
+    background: var(--bg); 
+    min-height: 100vh; 
+    transition: margin-left 0.3s ease;
+    width: calc(100% - var(--sidebar-width));
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    background: white;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-content { padding: 2rem; width: 100%; }
+
+.dashboard-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 2rem; 
+}
+
+/* =========================================
+   2. CARD COMPONENTS
+   ========================================= */
+.card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Tall Color Headers for Stats */
+.stat-mini {
+    padding-top: 5rem !important; 
+    text-align: center;
+}
+
+.stat-mini::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 70px;
+    z-index: 1;
+}
+
+.border-blue::before { background: #eef2ff; }
+.border-green::before { background: #f0fdf4; }
+.border-darkred::before { background: #fef2f2; }
+
+.large-icon {
+    width: 55px !important;
+    height: 55px !important;
+    font-size: 1.5rem !important;
+    border-radius: 50% !important;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    background: white !important;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Tags & Badges */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 1.5rem;
+}
+
+.tag {
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-left: 4px solid transparent;
+}
+
+.mastered { background: #f0fdf4; color: #15803d; border-left-color: #10b981; }
+.working { background: #f5f3ff; color: #4338ca; border-left-color: #6366f1; }
+
+.text-success { color: #10b981; font-weight: 700; }
+.text-danger { color: #ef4444; font-weight: 700; }
+
+@media (max-width: 1100px) {
+    :root { --sidebar-width: 80px; }
+    .hide-on-tablet { display: none; }
+    .main-layout { margin-left: 80px; width: calc(100% - 80px); }
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+}
+
+.footer {
+    box-sizing: border-box; /* Ensure padding doesn't push it out */
+}
